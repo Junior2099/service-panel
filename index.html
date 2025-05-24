@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Paraíso Gráfica Rápida</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/?size=100&id=S5D5w5vFLhYp&format=png&color=000000">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://img.icons8.com/?size=100&id=S5D5w5vFLhYp&format=png&color=000000">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #4361ee;
@@ -19,26 +22,26 @@
             --info: #4895ef;
             --gray: #adb5bd;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: var(--dark);
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
@@ -50,7 +53,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         header::before {
             content: '';
             position: absolute;
@@ -58,29 +61,29 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
             transform: rotate(30deg);
         }
-        
+
         h1 {
             margin: 0;
             font-size: 2.8rem;
             font-weight: 700;
             position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
+
         h1 i {
             margin-right: 15px;
         }
-        
+
         .subtitle {
             font-weight: 300;
             opacity: 0.9;
             margin-top: 10px;
             font-size: 1.1rem;
         }
-        
+
         .info-bar {
             display: flex;
             justify-content: space-between;
@@ -92,22 +95,55 @@
             margin-bottom: 30px;
             flex-wrap: wrap;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
+
         .info-item {
             display: flex;
             align-items: center;
             margin: 5px 0;
             font-size: 1rem;
         }
-        
+
         .info-item i {
             margin-right: 10px;
             font-size: 1.2rem;
             color: var(--primary);
         }
-        
+
+        .search-container {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
         .tabs {
             display: flex;
             margin-bottom: 20px;
@@ -116,7 +152,7 @@
             padding: 5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         .tab {
             padding: 12px 20px;
             cursor: pointer;
@@ -126,38 +162,45 @@
             text-align: center;
             flex: 1;
         }
-        
+
         .tab.active {
             background: var(--primary);
             color: white;
             box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
         }
-        
+
         .tab:not(.active):hover {
             background: rgba(67, 97, 238, 0.1);
         }
-        
+
         .tab-content {
             display: none;
         }
-        
+
         .tab-content.active {
             display: block;
             animation: fadeIn 0.5s ease;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 20px;
         }
-        
+
         .card {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 12px;
@@ -166,16 +209,16 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(5px);
             position: relative;
         }
-        
+
         .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
         }
-        
+
         .card-header {
             background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
@@ -186,14 +229,14 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .card-title {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             flex-grow: 1;
         }
-        
+
         .card-body {
             padding: 20px;
             flex-grow: 1;
@@ -201,7 +244,7 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        
+
         .card-icon {
             font-size: 2.8rem;
             text-align: center;
@@ -209,7 +252,7 @@
             color: var(--primary);
             opacity: 0.8;
         }
-        
+
         .card-visits {
             font-size: 0.85rem;
             color: var(--gray);
@@ -218,12 +261,12 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .card-visits i {
             margin-right: 5px;
             font-size: 1rem;
         }
-        
+
         .btn {
             display: block;
             background: linear-gradient(to right, var(--primary), var(--secondary));
@@ -238,17 +281,17 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(67, 97, 238, 0.4);
             background: linear-gradient(to right, var(--secondary), var(--primary));
         }
-        
+
         .btn i {
             margin-right: 8px;
         }
-        
+
         footer {
             text-align: center;
             margin-top: 50px;
@@ -261,7 +304,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .popular::after {
             content: 'POPULAR';
             position: absolute;
@@ -273,7 +316,21 @@
             font-size: 0.7rem;
             font-weight: bold;
             transform: rotate(45deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+            color: var(--gray);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            opacity: 0.5;
         }
 
         @media (max-width: 992px) {
@@ -281,39 +338,49 @@
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             }
         }
-        
+
         @media (max-width: 768px) {
             .info-bar {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-            
+
             .info-item {
                 margin: 8px 0;
                 justify-content: center;
             }
-            
+
             h1 {
                 font-size: 2.2rem;
             }
-            
+
             .tabs {
                 flex-direction: column;
             }
-            
+
             .tab {
                 padding: 12px;
             }
         }
-        
+
         @media (max-width: 576px) {
             .grid {
                 grid-template-columns: 1fr;
             }
+
+            .search-input {
+                padding-left: 45px;
+                font-size: 0.9rem;
+            }
+
+            .search-icon {
+                left: 15px;
+            }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -321,7 +388,7 @@
             <p class="subtitle">Todas as ferramentas que você precisa em um só lugar</p>
         </div>
     </header>
-    
+
     <div class="container">
         <div class="info-bar">
             <div class="info-item">
@@ -340,23 +407,28 @@
                 </div>
             </div>
         </div>
-        
+
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="search-input" placeholder="Pesquisar ferramentas...">
+        </div>
+
         <div class="tabs">
             <div class="tab active" data-tab="all">Todas as Ferramentas</div>
             <div class="tab" data-tab="popular">Mais Visitados</div>
         </div>
-        
+
         <div class="tab-content active" id="all-tools">
             <div class="grid" id="tools-grid">
             </div>
         </div>
-        
+
         <div class="tab-content" id="popular-tools">
             <div class="grid" id="popular-grid">
             </div>
         </div>
     </div>
-    
+
     <footer>
         <div class="container">
             <p>Painel Gráfica Premium &copy; <span id="current-year"></span> - Todos os direitos reservados</p>
@@ -501,7 +573,7 @@
                 icon: "fab fa-whatsapp",
                 category: "social",
                 visits: 0
-            },
+            }, 
             {
                 id: 18,
                 name: "Photopea",
@@ -509,7 +581,7 @@
                 icon: "fas fa-image",
                 category: "image",
                 visits: 0
-            },
+            },  
             {
                 id: 19,
                 name: "Calculadora",
@@ -519,11 +591,12 @@
                 visits: 0
             }
         ];
-        
+
         const toolsGrid = document.getElementById('tools-grid');
         const popularGrid = document.getElementById('popular-grid');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
+        const searchInput = document.getElementById('search-input');
 
         function loadTools() {
             const savedTools = localStorage.getItem('graphicPanelTools');
@@ -532,24 +605,48 @@
             }
             renderTools();
         }
-        
+
         function saveTools() {
             localStorage.setItem('graphicPanelTools', JSON.stringify(tools));
             updatePopularTab();
         }
-        
-        function renderTools() {
+
+        function renderTools(filter = '') {
             toolsGrid.innerHTML = '';
-            tools.forEach(tool => {
+
+            let filteredTools = tools;
+            if (filter) {
+                const searchTerm = filter.toLowerCase();
+                filteredTools = tools.filter(tool =>
+                    tool.name.toLowerCase().includes(searchTerm) ||
+                    tool.category.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            if (filteredTools.length === 0) {
+                toolsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhuma ferramenta encontrada</h3>
+                        <p>Tente usar termos de pesquisa diferentes</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredTools.forEach(tool => {
                 toolsGrid.appendChild(createToolCard(tool));
             });
+
             updatePopularTab();
         }
-        
+
         function updatePopularTab() {
             popularGrid.innerHTML = '';
             const popularTools = [...tools].sort((a, b) => b.visits - a.visits).slice(0, 6);
-            
+
+            if (popularTools.length === 0) return;
+
             popularTools.forEach(tool => {
                 const card = createToolCard(tool);
                 if (tool.visits > 0) {
@@ -564,7 +661,7 @@
             card.className = 'card';
             card.dataset.id = tool.id;
             card.dataset.category = tool.category;
-            
+
             card.innerHTML = `
                 <div class="card-header">
                     <div class="card-title">${tool.name}</div>
@@ -581,7 +678,7 @@
                     </a>
                 </div>
             `;
-        
+
             const link = card.querySelector('a');
             link.addEventListener('click', () => {
                 const toolId = parseInt(link.dataset.id);
@@ -591,30 +688,28 @@
                     saveTools();
                 }
             });
-            
+
             return card;
         }
 
         function updateDateTime() {
             const now = new Date();
-            
+
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
             const formattedTime = now.toLocaleTimeString('pt-BR', timeOptions);
             document.getElementById('current-time').textContent = formattedTime;
-
             const dateOptions = { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' };
             const formattedDate = now.toLocaleDateString('pt-BR', dateOptions);
             document.getElementById('current-date').textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-
             document.getElementById('current-year').textContent = now.getFullYear();
         }
-  
+
         function showSimpleWeather() {
             const now = new Date();
             const hour = now.getHours();
-            
+
             let temp, icon, condition;
-            
+
             if (hour >= 6 && hour < 12) {
                 temp = 22 + Math.floor(Math.random() * 5);
                 icon = 'fas fa-sun';
@@ -628,11 +723,11 @@
                 icon = 'fas fa-moon';
                 condition = 'Limpo';
             }
-            
+
             document.getElementById('current-weather').textContent = `${temp}°C - ${condition}`;
             document.getElementById('weather-icon').innerHTML = `<i class="${icon} weather-icon"></i>`;
         }
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             loadTools();
             updateDateTime();
@@ -643,12 +738,30 @@
                 tab.addEventListener('click', () => {
                     tabs.forEach(t => t.classList.remove('active'));
                     tabContents.forEach(c => c.classList.remove('active'));
-                    
+
                     tab.classList.add('active');
                     document.getElementById(`${tab.dataset.tab}-tools`).classList.add('active');
+
+                    if (tab.dataset.tab === 'all' && searchInput.value) {
+                        renderTools(searchInput.value);
+                    }
                 });
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                const activeTab = document.querySelector('.tab.active');
+                if (activeTab.dataset.tab === 'all') {
+                    renderTools(e.target.value);
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
             });
         });
     </script>
 </body>
+
 </html>

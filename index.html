@@ -540,7 +540,8 @@
             { id: 16, name: "Fazer Texto PNG", url: "https://junior2099.github.io/Text-PNG/", icon: "fas fa-font", category: "image", visits: 0 },
             { id: 17, name: "WhatsApp Web", url: "https://web.whatsapp.com/", icon: "fab fa-whatsapp", category: "social", visits: 0 },
             { id: 18, name: "Photopea", url: "https://www.photopea.com/", icon: "fas fa-image", category: "image", visits: 0 },
-            { id: 19, name: "Calculadora", url: "https://junior2099.github.io/calculator/", icon: "fas fa-calculator", category: "calculator", visits: 0 }
+            { id: 19, name: "Calculadora", url: "https://junior2099.github.io/calculator/", icon: "fas fa-calculator", category: "calculator", visits: 0 },
+            { id: 20, name: "Carta Convite", url: "https://junior2099.github.io/Invitation-letter/", icon: "fas fa-file-signature", category: "document", visits: 0 }
         ];
 
         const toolsGrid = document.getElementById('tools-grid');
@@ -702,7 +703,6 @@
             setInterval(updateDateTime, 1000);
             showSimpleWeather();
         
-            // Tab functionality
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     tabs.forEach(t => t.classList.remove('active'));

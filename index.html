@@ -194,30 +194,6 @@
             flex-grow: 1;
         }
         
-        .card-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .card-action-btn {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .card-action-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-        
         .card-body {
             padding: 20px;
             flex-grow: 1;
@@ -273,27 +249,6 @@
             margin-right: 8px;
         }
         
-        .btn-secondary {
-            background: var(--light);
-            color: var(--dark);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .btn-secondary:hover {
-            background: #e9ecef;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-accent {
-            background: linear-gradient(to right, var(--accent), #ff7096);
-            box-shadow: 0 4px 8px rgba(247, 37, 133, 0.3);
-        }
-        
-        .btn-accent:hover {
-            background: linear-gradient(to right, #ff7096, var(--accent));
-            box-shadow: 0 6px 12px rgba(247, 37, 133, 0.4);
-        }
-        
         footer {
             text-align: center;
             margin-top: 50px;
@@ -302,118 +257,23 @@
             font-size: 0.9rem;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .modal-content {
-            background: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        .popular {
+            position: relative;
             overflow: hidden;
-            transform: translateY(0);
-            animation: modalSlideIn 0.4s ease;
         }
         
-        @keyframes modalSlideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .modal-header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+        .popular::after {
+            content: 'POPULAR';
+            position: absolute;
+            top: 10px;
+            right: -25px;
+            background: var(--accent);
             color: white;
-            padding: 20px;
-            font-size: 1.3rem;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        
-        .modal-close:hover {
-            transform: rotate(90deg);
-        }
-        
-        .modal-body {
-            padding: 25px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-            outline: none;
-        }
-        
-        .modal-footer {
-            padding: 15px 25px;
-            background: #f8f9fa;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            border-top: 1px solid #eee;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 8px;
-        }
-        
-        .badge-primary {
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-        }
-        
-        .badge-accent {
-            background: rgba(247, 37, 133, 0.1);
-            color: var(--accent);
+            padding: 3px 30px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 992px) {
@@ -451,29 +311,6 @@
             .grid {
                 grid-template-columns: 1fr;
             }
-            
-            .modal-content {
-                width: 95%;
-            }
-        }
-
-        .popular {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .popular::after {
-            content: 'POPULAR';
-            position: absolute;
-            top: 10px;
-            right: -25px;
-            background: var(--accent);
-            color: white;
-            padding: 3px 30px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            transform: rotate(45deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -502,40 +339,20 @@
                     <span id="current-weather">Carregando clima...</span>
                 </div>
             </div>
-            <div class="info-item">
-                <i class="fas fa-fire"></i>
-                <span id="most-visited">Nenhum acesso ainda</span>
-            </div>
         </div>
         
         <div class="tabs">
             <div class="tab active" data-tab="all">Todas as Ferramentas</div>
             <div class="tab" data-tab="popular">Mais Visitados</div>
-            <div class="tab" data-tab="add-new" id="add-new-tab">
-                <i class="fas fa-plus"></i> Adicionar Nova
-            </div>
         </div>
         
         <div class="tab-content active" id="all-tools">
             <div class="grid" id="tools-grid">
-    
             </div>
         </div>
         
         <div class="tab-content" id="popular-tools">
             <div class="grid" id="popular-grid">
-
-            </div>
-        </div>
-        
-        <div class="tab-content" id="add-new-tool">
-            <div style="text-align: center; padding: 40px 20px;">
-                <i class="fas fa-plus-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
-                <h2 style="margin-bottom: 20px;">Adicionar Nova Ferramenta</h2>
-                <p style="margin-bottom: 30px; color: var(--gray);">Adicione seus próprios links e ferramentas ao painel</p>
-                <button class="btn btn-accent" id="open-add-modal">
-                    <i class="fas fa-plus"></i> Adicionar Ferramenta
-                </button>
             </div>
         </div>
     </div>
@@ -545,45 +362,7 @@
             <p>Painel Gráfica Premium &copy; <span id="current-year"></span> - Todos os direitos reservados</p>
         </div>
     </footer>
-    
 
-    <div class="modal" id="tool-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span id="modal-title">Adicionar Nova Ferramenta</span>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="tool-name">Nome da Ferramenta</label>
-                    <input type="text" id="tool-name" class="form-control" placeholder="Ex: Editor de Fotos">
-                </div>
-                <div class="form-group">
-                    <label for="tool-url">URL</label>
-                    <input type="url" id="tool-url" class="form-control" placeholder="https://exemplo.com">
-                </div>
-                <div class="form-group">
-                    <label for="tool-icon">Ícone (classe Font Awesome)</label>
-                    <input type="text" id="tool-icon" class="form-control" placeholder="fas fa-image">
-                    <small style="color: var(--gray);">Visite <a href="https://fontawesome.com/icons" target="_blank">Font Awesome</a> para encontrar ícones</small>
-                </div>
-                <div class="form-group">
-                    <label for="tool-category">Categoria</label>
-                    <select id="tool-category" class="form-control">
-                        <option value="document">Documentos</option>
-                        <option value="image">Imagens</option>
-                        <option value="social">Social</option>
-                        <option value="other">Outros</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancel-tool">Cancelar</button>
-                <button class="btn" id="save-tool">Salvar</button>
-            </div>
-        </div>
-    </div>
-    
     <script>
 
         let tools = [
@@ -597,7 +376,7 @@
             },
             {
                 id: 2,
-                name: "Pull Results Medic",
+                name: "Resultados de Exames",
                 url: "https://junior2099.github.io/Pull-Results-Medic/",
                 icon: "fas fa-file-medical",
                 category: "document",
@@ -605,7 +384,7 @@
             },
             {
                 id: 3,
-                name: "Copiar Contas",
+                name: "2 via Contas",
                 url: "https://junior2099.github.io/copy-accounts-payment/",
                 icon: "fas fa-money-bill-wave",
                 category: "document",
@@ -613,7 +392,7 @@
             },
             {
                 id: 4,
-                name: "Organizar PDF",
+                name: "Imprimir",
                 url: "https://junior2099.github.io/organize-pdf/",
                 icon: "fas fa-file-pdf",
                 category: "document",
@@ -629,7 +408,7 @@
             },
             {
                 id: 6,
-                name: "Easy Crop",
+                name: "Cortar Imagem",
                 url: "https://junior2099.github.io/Easy_Crop/",
                 icon: "fas fa-crop-alt",
                 category: "image",
@@ -669,7 +448,7 @@
             },
             {
                 id: 11,
-                name: "Foto 5x5 A4",
+                name: "Tag 5x5",
                 url: "https://junior2099.github.io/foto-5x5-A4/",
                 icon: "fas fa-th-large",
                 category: "image",
@@ -677,7 +456,7 @@
             },
             {
                 id: 12,
-                name: "Foto 4x4 A4",
+                name: "Tag 4x4",
                 url: "https://junior2099.github.io/foto-4x4---A4/",
                 icon: "fas fa-th",
                 category: "image",
@@ -709,7 +488,7 @@
             },
             {
                 id: 16,
-                name: "Texto para PNG",
+                name: "Fazer Texto",
                 url: "https://junior2099.github.io/Text-PNG/",
                 icon: "fas fa-text-height",
                 category: "image",
@@ -730,53 +509,45 @@
                 icon: "fas fa-image",
                 category: "image",
                 visits: 0
+            },
+            {
+                id: 19,
+                name: "Calculadora",
+                url: "https://junior2099.github.io/calculator/",
+                icon: "fas fa-calculator",
+                category: "calculator",
+                visits: 0
             }
         ];
-        
-        let currentEditingId = null;
-        let nextId = 19;
         
         const toolsGrid = document.getElementById('tools-grid');
         const popularGrid = document.getElementById('popular-grid');
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
-        const modal = document.getElementById('tool-modal');
-        const openAddModalBtn = document.getElementById('open-add-modal');
-        const cancelToolBtn = document.getElementById('cancel-tool');
-        const saveToolBtn = document.getElementById('save-tool');
-        const modalTitle = document.getElementById('modal-title');
 
         function loadTools() {
             const savedTools = localStorage.getItem('graphicPanelTools');
             if (savedTools) {
                 tools = JSON.parse(savedTools);
-
-                nextId = Math.max(...tools.map(tool => tool.id)) + 1;
             }
             renderTools();
         }
         
-
         function saveTools() {
             localStorage.setItem('graphicPanelTools', JSON.stringify(tools));
-            updateMostVisited();
+            updatePopularTab();
         }
         
-
         function renderTools() {
             toolsGrid.innerHTML = '';
             tools.forEach(tool => {
                 toolsGrid.appendChild(createToolCard(tool));
             });
-            
-
             updatePopularTab();
         }
         
-
         function updatePopularTab() {
             popularGrid.innerHTML = '';
-
             const popularTools = [...tools].sort((a, b) => b.visits - a.visits).slice(0, 6);
             
             popularTools.forEach(tool => {
@@ -787,7 +558,7 @@
                 popularGrid.appendChild(card);
             });
         }
-        
+
         function createToolCard(tool) {
             const card = document.createElement('div');
             card.className = 'card';
@@ -797,14 +568,6 @@
             card.innerHTML = `
                 <div class="card-header">
                     <div class="card-title">${tool.name}</div>
-                    <div class="card-actions">
-                        <button class="card-action-btn edit-tool" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="card-action-btn delete-tool" title="Remover">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="card-icon">
@@ -818,7 +581,7 @@
                     </a>
                 </div>
             `;
-            
+        
             const link = card.querySelector('a');
             link.addEventListener('click', () => {
                 const toolId = parseInt(link.dataset.id);
@@ -828,113 +591,17 @@
                     saveTools();
                 }
             });
-
-            card.querySelector('.edit-tool').addEventListener('click', () => openEditModal(tool.id));
-            card.querySelector('.delete-tool').addEventListener('click', () => deleteTool(tool.id));
             
             return card;
         }
 
-        function openAddModal() {
-            currentEditingId = null;
-            modalTitle.textContent = 'Adicionar Nova Ferramenta';
-            document.getElementById('tool-name').value = '';
-            document.getElementById('tool-url').value = '';
-            document.getElementById('tool-icon').value = 'fas fa-link';
-            document.getElementById('tool-category').value = 'other';
-            saveToolBtn.textContent = 'Adicionar';
-            modal.style.display = 'flex';
-        }
-        
-        function openEditModal(id) {
-            const tool = tools.find(t => t.id === id);
-            if (!tool) return;
-            
-            currentEditingId = id;
-            modalTitle.textContent = 'Editar Ferramenta';
-            document.getElementById('tool-name').value = tool.name;
-            document.getElementById('tool-url').value = tool.url;
-            document.getElementById('tool-icon').value = tool.icon;
-            document.getElementById('tool-category').value = tool.category;
-            saveToolBtn.textContent = 'Salvar Alterações';
-            modal.style.display = 'flex';
-        }
-        
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-        
-        function saveTool() {
-            const name = document.getElementById('tool-name').value.trim();
-            const url = document.getElementById('tool-url').value.trim();
-            const icon = document.getElementById('tool-icon').value.trim();
-            const category = document.getElementById('tool-category').value;
-            
-            if (!name || !url) {
-                alert('Por favor, preencha pelo menos o nome e a URL da ferramenta');
-                return;
-            }
-            
-            if (currentEditingId === null) {
-                const newTool = {
-                    id: nextId++,
-                    name,
-                    url,
-                    icon: icon || 'fas fa-link',
-                    category,
-                    visits: 0
-                };
-                tools.push(newTool);
-            } else {
-                const toolIndex = tools.findIndex(t => t.id === currentEditingId);
-                if (toolIndex !== -1) {
-                    tools[toolIndex] = {
-                        ...tools[toolIndex],
-                        name,
-                        url,
-                        icon: icon || 'fas fa-link',
-                        category
-                    };
-                }
-            }
-            
-            saveTools();
-            renderTools();
-            closeModal();
-        }
-        
-        function deleteTool(id) {
-            if (confirm('Tem certeza que deseja remover esta ferramenta?')) {
-                tools = tools.filter(tool => tool.id !== id);
-                saveTools();
-                renderTools();
-            }
-        }
-
-        function updateMostVisited() {
-            if (tools.length === 0) {
-                document.getElementById('most-visited').textContent = 'Nenhum acesso ainda';
-                return;
-            }
-            
-            const mostVisited = tools.reduce((prev, current) => 
-                (prev.visits > current.visits) ? prev : current
-            );
-            
-            if (mostVisited.visits > 0) {
-                document.getElementById('most-visited').textContent = `${mostVisited.name} (${mostVisited.visits} visitas)`;
-            } else {
-                document.getElementById('most-visited').textContent = 'Nenhum acesso ainda';
-            }
-        }
-        
         function updateDateTime() {
             const now = new Date();
             
             const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
             const formattedTime = now.toLocaleTimeString('pt-BR', timeOptions);
             document.getElementById('current-time').textContent = formattedTime;
-            
+
             const dateOptions = { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' };
             const formattedDate = now.toLocaleDateString('pt-BR', dateOptions);
             document.getElementById('current-date').textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
@@ -949,17 +616,14 @@
             let temp, icon, condition;
             
             if (hour >= 6 && hour < 12) {
-       
                 temp = 22 + Math.floor(Math.random() * 5);
                 icon = 'fas fa-sun';
                 condition = 'Ensolarado';
             } else if (hour >= 12 && hour < 18) {
-           
                 temp = 26 + Math.floor(Math.random() * 5);
                 icon = 'fas fa-cloud-sun';
                 condition = 'Parcialmente nublado';
             } else {
-            
                 temp = 18 + Math.floor(Math.random() * 5);
                 icon = 'fas fa-moon';
                 condition = 'Limpo';
@@ -969,13 +633,11 @@
             document.getElementById('weather-icon').innerHTML = `<i class="${icon} weather-icon"></i>`;
         }
         
-
         document.addEventListener('DOMContentLoaded', () => {
             loadTools();
             updateDateTime();
             setInterval(updateDateTime, 1000);
             showSimpleWeather();
-            
 
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
@@ -985,25 +647,6 @@
                     tab.classList.add('active');
                     document.getElementById(`${tab.dataset.tab}-tools`).classList.add('active');
                 });
-            });
-            
- 
-            openAddModalBtn.addEventListener('click', openAddModal);
-            cancelToolBtn.addEventListener('click', closeModal);
-            saveToolBtn.addEventListener('click', saveTool);
-            document.querySelector('.modal-close').addEventListener('click', closeModal);
-            
-   
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && modal.style.display === 'flex') {
-                    saveTool();
-                }
             });
         });
     </script>

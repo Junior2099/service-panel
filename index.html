@@ -667,7 +667,8 @@
             { id: 17, name: "WhatsApp Web", url: "https://web.whatsapp.com/", icon: "fab fa-whatsapp", category: "social", visits: 0 },
             { id: 18, name: "Photopea", url: "https://www.photopea.com/", icon: "fas fa-image", category: "image", visits: 0 },
             { id: 19, name: "Calculadora", url: "https://junior2099.github.io/calculator/", icon: "fas fa-calculator", category: "calculator", visits: 0 },
-            { id: 20, name: "Carta Convite", url: "https://junior2099.github.io/Invitation-letter/", icon: "fas fa-file-signature", category: "document", visits: 0 }
+            { id: 20, name: "Carta Convite", url: "https://junior2099.github.io/Invitation-letter/", icon: "fas fa-file-signature", category: "document", visits: 0 },
+            { id: 21, name: "Imprimir", url: "https://junior2099.github.io/Organizador-de-Fotos/", icon: "fas fa-print", category: "image", visits: 0 }
         ];
 
         const toolsGrid = document.getElementById('tools-grid');
@@ -683,7 +684,15 @@
         function loadTools() {
             const savedTools = localStorage.getItem('graphicPanelTools');
             if (savedTools) {
-                tools = JSON.parse(savedTools);
+                try {
+                    const savedArray = JSON.parse(savedTools);
+                    const savedIds = new Set(savedArray.map(t => t.id));
+                    const missingDefaults = tools.filter(t => !savedIds.has(t.id));
+                    tools = [...savedArray, ...missingDefaults];
+                    saveTools();
+                } catch (err) {
+                    // mantém a lista padrão se o parse falhar
+                }
             }
             renderTools(); 
         }
@@ -697,7 +706,6 @@
             const savedTheme = localStorage.getItem('graphicPanelTheme') || 'default';
             setTheme(savedTheme);
             
-            // Marcar o tema ativo
             themeOptions.forEach(option => {
                 option.classList.remove('active');
                 if(option.dataset.theme === savedTheme) {
@@ -707,7 +715,6 @@
         }
 
         function setTheme(theme) {
-            // Remove todas as classes de tema primeiro
             document.body.classList.remove('theme-blue', 'theme-green', 'theme-pink', 'theme-dark');
             
             if(theme !== 'default') {

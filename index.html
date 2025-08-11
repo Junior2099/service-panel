@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -668,7 +669,11 @@
             { id: 18, name: "Photopea", url: "https://www.photopea.com/", icon: "fas fa-image", category: "image", visits: 0 },
             { id: 19, name: "Calculadora", url: "https://junior2099.github.io/calculator/", icon: "fas fa-calculator", category: "calculator", visits: 0 },
             { id: 20, name: "Carta Convite", url: "https://junior2099.github.io/Invitation-letter/", icon: "fas fa-file-signature", category: "document", visits: 0 },
-            { id: 21, name: "Imprimir", url: "https://junior2099.github.io/Organizador-de-Fotos/", icon: "fas fa-print", category: "image", visits: 0 }
+            { id: 21, name: "Imprimir", url: "https://junior2099.github.io/Organizador-de-Fotos/", icon: "fas fa-print", category: "document", visits: 0 },
+            { id: 22, name: "Registration Card", url: "https://junior2099.github.io/Registration-Card/", icon: "fas fa-id-card", category: "document", visits: 0 },
+            { id: 23, name: "Editor de PDF", url: "https://junior2099.github.io/pdf-editor/", icon: "fas fa-file-pdf", category: "document", visits: 0 },
+            { id: 24, name: "Expandir Imagem (IA)", url: "https://www.pixelcut.ai/pt-br/expandir-imagem-com-ia", icon: "fas fa-expand", category: "image", visits: 0 },
+            { id: 25, name: "Registration Card (Financeiro)", url: "https://junior2099.github.io/Registration-Card/", icon: "fas fa-id-card", category: "calculator", visits: 0 }
         ];
 
         const toolsGrid = document.getElementById('tools-grid');
@@ -689,6 +694,12 @@
                     const savedIds = new Set(savedArray.map(t => t.id));
                     const missingDefaults = tools.filter(t => !savedIds.has(t.id));
                     tools = [...savedArray, ...missingDefaults];
+
+              
+                    const organizerIndex = tools.findIndex(t => typeof t.url === 'string' && t.url.includes('Organizador-de-Fotos'));
+                    if (organizerIndex !== -1) {
+                        tools[organizerIndex].category = 'document';
+                    }
                     saveTools();
                 } catch (err) {
                     // mantém a lista padrão se o parse falhar

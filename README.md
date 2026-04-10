@@ -1,3 +1,5 @@
+https://junior2099.github.io/service-panel/
+
 # 🖨️ Painel Gráfica Rápida
 
 Um painel moderno e intuitivo para gerenciar e acessar rapidamente ferramentas essenciais de uma gráfica rápida. Desenvolvido com HTML, CSS e JavaScript puro, oferece uma interface responsiva e personalizável.

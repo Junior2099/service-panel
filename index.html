@@ -9,48 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #54574ae3; 
-            --secondary: #335c44;
-            --accent: #f72585;
-            --background-light: #edf2f7; 
-            --card-background: #ffffff;
-            --text-dark: #2d3748;
-            --text-light: #718096; 
-            --border-color: #e2e8f0;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-bg-darker: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            --glass-hover: rgba(255, 255, 255, 0.25);
+            --glass-active: rgba(255, 255, 255, 0.35);
+            
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.8);
+            --accent: rgba(255, 255, 255, 0.5);
+            
             --sidebar-width: 250px;
-            --header-height: 80px;
-        }
-
-        .theme-blue {
-            --primary: #1e40af;
-            --secondary: #3b82f6;
-            --accent: #60a5fa;
-            --background-light: #eff6ff;
-        }
-
-        .theme-green {
-            --primary: #065f46;
-            --secondary: #10b981;
-            --accent: #34d399;
-            --background-light: #ecfdf5;
-        }
-
-        .theme-pink {
-            --primary: #9d174d;
-            --secondary: #ec4899;
-            --accent: #f472b6;
-            --background-light: #fdf2f8;
-        }
-
-        .theme-dark {
-            --primary: #1e293b;
-            --secondary: #475569;
-            --accent: #64748b;
-            --background-light: #0f172a;
-            --card-background: #f8f8f8;
-            --text-dark: #74777a;
-            --text-light: #94a3b8;
-            --border-color: #334155;
         }
 
         * {
@@ -59,14 +29,52 @@
             box-sizing: border-box;
         }
 
+        /* Animação e gradientes do fundo para destacar o efeito Liquid Glass */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-dark);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: background 0.5s ease;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body.theme-blue {
+            background: linear-gradient(-45deg, #1e3c72, #2a5298, #00d2ff, #3a7bd5);
+            background-size: 400% 400%;
+        }
+
+        body.theme-green {
+            background: linear-gradient(-45deg, #11998e, #38ef7d, #00b09b, #96c93d);
+            background-size: 400% 400%;
+        }
+
+        body.theme-pink {
+            background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ec4899, #f472b6);
+            background-size: 400% 400%;
+        }
+
+        body.theme-dark {
+            background: linear-gradient(-45deg, #141e30, #243b55, #0f2027, #203a43);
+            background-size: 400% 400%;
+        }
+
+        /* Classe utilitária para o efeito Glass */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
         }
 
         .dashboard-container {
@@ -76,10 +84,11 @@
 
         .sidebar {
             width: var(--sidebar-width);
-            background: var(--primary);
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-right: 1px solid var(--glass-border);
             padding: 30px 0;
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             position: sticky;
@@ -87,7 +96,6 @@
             height: 100vh; 
             overflow-y: auto; 
             z-index: 1000;
-            transition: background 0.3s ease;
         }
 
         .sidebar-header {
@@ -100,11 +108,12 @@
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .sidebar-header p {
             font-size: 0.9rem;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .sidebar-nav ul {
@@ -113,18 +122,20 @@
         }
 
         .sidebar-nav li {
-            margin-bottom: 13px;
+            margin-bottom: 10px;
         }
 
         .sidebar-nav a {
             display: flex;
             align-items: center;
             padding: 12px 25px;
-            color: white;
+            color: var(--text-main);
             text-decoration: none;
             font-weight: 500;
-            transition: background 0.3s ease, padding-left 0.3s ease;
+            transition: all 0.3s ease;
             border-radius: 0 25px 25px 0;
+            border: 1px solid transparent;
+            border-left: none;
         }
 
         .sidebar-nav a i {
@@ -134,15 +145,18 @@
 
         .sidebar-nav a:hover,
         .sidebar-nav a.active {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--glass-hover);
+            border: 1px solid var(--glass-border);
+            border-left: none;
             padding-left: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .sidebar-themes {
             padding: 20px;
             margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .sidebar-themes h3 {
@@ -168,8 +182,8 @@
             height: 30px;
             border-radius: 50%;
             cursor: pointer;
-            border: 2px solid white;
-            transition: transform 0.2s ease;
+            border: 2px solid rgba(255,255,255,0.6);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .theme-option:hover {
@@ -178,41 +192,28 @@
 
         .theme-option.active {
             transform: scale(1.1);
-            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--secondary);
+            box-shadow: 0 0 0 2px transparent, 0 0 0 4px #fff;
         }
 
-        .theme-default {
-            background: linear-gradient(135deg, #54574ae3 50%, #335c44 50%);
-        }
-
-        .theme-blue-option {
-            background: linear-gradient(135deg, #1e40af 50%, #3b82f6 50%);
-        }
-
-        .theme-green-option {
-            background: linear-gradient(135deg, #065f46 50%, #10b981 50%);
-        }
-
-        .theme-pink-option {
-            background: linear-gradient(135deg, #9d174d 50%, #ec4899 50%);
-        }
-
-        .theme-dark-option {
-            background: linear-gradient(135deg, #1e293b 50%, #475569 50%);
-        }
+        .theme-default { background: linear-gradient(135deg, #ee7752, #e73c7e); }
+        .theme-blue-option { background: linear-gradient(135deg, #1e3c72, #00d2ff); }
+        .theme-green-option { background: linear-gradient(135deg, #11998e, #96c93d); }
+        .theme-pink-option { background: linear-gradient(135deg, #ff758c, #ec4899); }
+        .theme-dark-option { background: linear-gradient(135deg, #141e30, #203a43); }
 
         .sidebar-info {
             padding: 20px;
             margin-top: auto; 
             font-size: 1.1rem;
             opacity: 0.9;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--glass-border);
         }
 
         .sidebar-info p {
             margin-bottom: 8px;
             display: flex;
             align-items: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         .sidebar-info i {
@@ -229,111 +230,100 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--card-background);
             padding: 20px 25px;
-            border-radius: 12px;
+            border-radius: 16px;
             margin-bottom: 35px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: background 0.3s ease;
         }
 
         .top-bar h1 {
             font-size: 1.8rem;
             margin: 0;
-            color: var(--primary);
-            text-transform:capitalize;
+            text-transform: capitalize;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .search-container {
             position: relative;
             width: 850px; 
-            gap: 10px;
             display: flex;
             align-items: center;
-            background: var(--card-background);
-            border-radius: 6px;    
-            padding: 26px 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.9s ease;
+            border-radius: 12px;    
+            padding: 15px;
         }
 
         .search-input {
             width: 100%;
-            padding: 17px 15px 12px 45px;
-            border: 1px solid var(--border-color);
+            padding: 15px 15px 15px 45px;
+            border: 1px solid var(--glass-border);
             border-radius: 8px;
             font-size: 0.95rem;
             font-family: 'Inter', sans-serif;
-            background: var(--background-light);
-            transition: all 0.6s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.2);
-            background: white;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .search-icon {
             position: absolute;
-            left: 35px;
+            left: 30px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 1rem;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            opacity: 0.8;
         }
 
         .tabs {
             display: flex;
-            background: var(--card-background);
-            border-radius: 12px;
-            padding: 5px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 8px;
             margin-bottom: 25px;
-            transition: background 0.3s ease;
         }
 
         .tab {
             flex: 1;
             padding: 12px 20px;
             cursor: pointer;
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: 10px;
+            font-weight: 600;
             transition: all 0.3s ease;
             text-align: center;
-            color: var(--text-light);
+            color: var(--text-muted);
         }
 
         .tab.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 8px rgba(90, 103, 216, 0.3);
+            background: var(--glass-active);
+            color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--glass-border);
         }
 
         .tab:not(.active):hover {
-            background: var(--background-light);
-            color: var(--primary);
+            background: var(--glass-hover);
+            color: var(--text-main);
         }
 
-        .tab-content {
-            display: none;
-        }
-
+        .tab-content { display: none; }
         .tab-content.active {
             display: block;
             animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .grid {
@@ -343,32 +333,29 @@
         }
 
         .card {
-            background: var(--card-background);
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--border-color);
             position: relative;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.25);
         }
 
         .card-header {
-            background: var(--primary);
-            color: rgb(250, 250, 250);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--glass-border);
             padding: 15px 20px;
             font-size: 1.1rem;
             font-weight: 600;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            text-transform:lowercase;
-            transition: background 0.3s ease;
+            text-transform: lowercase;
+            letter-spacing: 1px;
         }
 
         .card-body {
@@ -382,16 +369,20 @@
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 15px;
-            color: var(--primary);
-            opacity: 0.9;
-            transition: color 0.3s ease;
+            color: var(--text-main);
+            text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
         }
 
         .card-visits {
             font-size: 0.9rem;
-            color: var(--text-light);
+            color: var(--text-muted);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -401,49 +392,47 @@
         .card-visits i {
             margin-right: 8px;
             font-size: 1rem;
-            color: var(--primary);
-            transition: color 0.3s ease;
         }
 
         .btn {
             display: block;
             width: 100%;
-            background: var(--primary);
-            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-main);
             text-align: center;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 600;
-            border: none;
+            border: 1px solid var(--glass-border);
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(90, 103, 216, 0.3);
+            backdrop-filter: blur(5px);
             margin-top: auto; 
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(90, 103, 216, 0.4);
-            background: var(--secondary);
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .btn i {
-            margin-right: 8px;
-        }
+        .btn i { margin-right: 8px; }
 
         .popular::after {
             content: 'Popular';
             position: absolute;
-            top: 10px;
-            right: -25px;
-            background: var(--accent);
-            color: white;
-            padding: 3px 30px;
-            font-size: 0.7rem;
+            top: 12px;
+            right: -30px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: var(--text-main);
+            padding: 5px 35px;
+            font-size: 0.75rem;
             font-weight: bold;
             transform: rotate(45deg);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
 
@@ -451,47 +440,37 @@
             text-align: center;
             padding: 60px;
             grid-column: 1 / -1;
-            color: var(--text-light);
-            background: var(--card-background);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
         }
 
         .no-results i {
             font-size: 4rem;
             margin-bottom: 20px;
-            color: var(--primary);
-            opacity: 0.5;
+            opacity: 0.8;
         }
 
         footer {
             text-align: center;
-            margin-top: 0px;
             padding: 20px;
-            font-size: 0.85rem;
-            color: var(--card-background);
-            background: var(--primary);
-            transition: background 0.3s ease;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--glass-border);
         }
 
         @media (max-width: 1200px) {
-            .grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
         }
 
         @media (max-width: 992px) {
-            .dashboard-container {
-                flex-direction: column;
-            }
+            .dashboard-container { flex-direction: column; }
 
             .sidebar {
                 width: 100%;
                 height: auto;
                 position: relative;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                border-bottom-left-radius: 20px;
-                border-bottom-right-radius: 20px;
+                border-bottom: 1px solid var(--glass-border);
+                border-right: none;
                 padding-bottom: 0;
             }
 
@@ -502,81 +481,40 @@
                 padding: 10px 0;
             }
 
-            .sidebar-nav li {
-                margin: 0 5px 10px;
-            }
+            .sidebar-nav li { margin: 0 5px 10px; }
 
             .sidebar-nav a {
                 padding: 10px 15px;
-                border-radius: 8px;
+                border-radius: 10px;
+                border: 1px solid transparent;
                 justify-content: center;
-            }
-
-            .sidebar-nav a i {
-                margin-right: 8px;
             }
 
             .sidebar-nav a:hover,
             .sidebar-nav a.active {
                 padding: 10px 15px; 
+                border-radius: 10px;
+                border: 1px solid var(--glass-border);
             }
 
-            .sidebar-header, .sidebar-info, .sidebar-themes {
-                display: none; 
-            }
+            .sidebar-header, .sidebar-info, .sidebar-themes { display: none; }
 
             .top-bar {
                 flex-direction:column-reverse;
                 align-items: flex-start;
-                padding: 15px 20px;
-            }
-
-            .top-bar h1 {
-                margin-bottom: 15px;
-            }
-
-            .search-container {
-                width: 100%;
-            }
-
-            .grid {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
                 padding: 20px;
             }
 
-            .tabs {
-                flex-direction: column;
-            }
-
-            .tab {
-                margin-bottom: 5px;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
+            .top-bar h1 { margin-bottom: 15px; }
+            .search-container { width: 100%; padding: 0; background: transparent; border: none; box-shadow: none;}
+            .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
         }
 
-        @media (max-width: 480px) {
-            .sidebar-nav ul {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .sidebar-nav li {
-                margin: 0;
-            }
-            .sidebar-nav a {
-                border-radius: 0;
-                justify-content: flex-start;
-            }
-            .top-bar h1 {
-                font-size: 1.5rem;
-            }
+        @media (max-width: 768px) {
+            .main-content { padding: 20px; }
+            .tabs { flex-direction: column; }
+            .tab { margin-bottom: 5px; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -599,7 +537,7 @@
             </nav>
             
             <div class="sidebar-themes">
-                <h3><i class="fas fa-palette"></i> Temas</h3>
+                <h3><i class="fas fa-palette"></i> Temas (Glass)</h3>
                 <div class="theme-selector">
                     <div class="theme-option theme-default active" data-theme="default"></div>
                     <div class="theme-option theme-blue-option" data-theme="blue"></div>
@@ -617,16 +555,18 @@
         </aside>
 
         <main class="main-content">
-            <div class="top-bar">
-                <h1>Bem-vindo ao Painel!</h1>
-                <p> Atendentes: Heloiza & Celiana 😊 </p><br>
-                <div class="search-container">
+            <div class="top-bar glass-panel">
+                <div>
+                    <h1>Bem-vindo ao Painel!</h1>
+                    <p> Olá Atendente - Que Deus abençõe seu dia e vendas😊 </p>
+                </div>
+                <div class="search-container glass-panel">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="search-input" id="search-input" placeholder="Pesquisar ferramentas...">
                 </div>
             </div>
 
-            <div class="tabs">
+            <div class="tabs glass-panel">
                 <div class="tab active" data-tab="all">Todas as Ferramentas</div>
                 <div class="tab" data-tab="popular">Mais Visitados</div>
             </div>
@@ -661,7 +601,7 @@
             { id: 11, name: "Tag 5x5", url: "https://junior2099.github.io/foto-5x5-A4/", icon: "fas fa-tag", category: "image", visits: 0 },
             { id: 12, name: "Tag 4x4", url: "https://junior2099.github.io/foto-4x4---A4/", icon: "fas fa-tags", category: "image", visits: 0 },
             { id: 13, name: "Declaração de Residência", url: "https://junior2099.github.io/declaration-of-residence/", icon: "fas fa-file-signature", category: "document", visits: 0 },
-            { id: 14, name: "Melhorador de Fotos", url: "https://picwish.com/pt-br/photo-enhancer", icon: "fas fa-wand-magic-sparkles", category: "image", visits: 0 },
+            { id: 14, name: "Melhorador de Fotos", url: "https://picsart.com/pt/ai-image-enhancer/", icon: "fas fa-wand-magic-sparkles", category: "image", visits: 0 },
             { id: 15, name: "Contrato de Locação", url: "https://junior2099.github.io/Lease_Agreement/", icon: "fas fa-house-user", category: "document", visits: 0 },
             { id: 16, name: "Fazer Texto", url: "https://junior2099.github.io/Text-PNG/", icon: "fas fa-font", category: "image", visits: 0 },
             { id: 17, name: "WhatsApp Web", url: "https://web.whatsapp.com/", icon: "fab fa-whatsapp", category: "social", visits: 0 },
@@ -672,7 +612,7 @@
             { id: 22, name: "Cartão de Cadastro", url: "https://junior2099.github.io/Registration-Card/", icon: "fas fa-id-card", category: "document", visits: 0 },
             { id: 23, name: "Editor de PDF", url: "https://junior2099.github.io/pdf-editor/", icon: "fas fa-file-pdf", category: "document", visits: 0 },
             { id: 24, name: "Expandir Imagem (IA)", url: "https://www.pixelcut.ai/pt-br/expandir-imagem-com-ia", icon: "fas fa-expand", category: "image", visits: 0 },
-             { id: 25, name: "Declaração de dependência", url: "https://junior2099.github.io/DECLARATION-OF-FINANCIAL-DEPENDENCE/", icon: "fas fa-file-signature", category: "document", visits: 0 },
+            { id: 25, name: "Declaração de dependência", url: "https://junior2099.github.io/DECLARATION-OF-FINANCIAL-DEPENDENCE/", icon: "fas fa-file-signature", category: "document", visits: 0 },
             { id: 26, name: "Polaroid", url: "https://junior2099.github.io/Fotos-Polaroid/", icon: "fas fa-image", category: "image", visits: 0 },
             { id: 27, name: "Boletim de Ocorrência", url: "https://junior2099.github.io/police-report/", icon: "fas fa-file-alt", category: "document", visits: 0 },
             { id: 28, name: "Autorização de Viagem", url: "https://junior2099.github.io/Travel-authorization/", icon: "fas fa-plane", category: "document", visits: 0 }
@@ -697,7 +637,6 @@
                     const missingDefaults = tools.filter(t => !savedIds.has(t.id));
                     tools = [...savedArray, ...missingDefaults];
 
-                    // Remove Registration Card financeiro se existir
                     tools = tools.filter(t => !(typeof t.url === 'string' && t.url.includes('Registration-Card') && t.category === 'calculator'));
               
                     const organizerIndex = tools.findIndex(t => typeof t.url === 'string' && t.url.includes('Organizador-de-Fotos'));
@@ -705,9 +644,7 @@
                         tools[organizerIndex].category = 'document';
                     }
                     saveTools();
-                } catch (err) {
-                    // mantém a lista padrão se o parse falhar
-                }
+                } catch (err) { }
             }
             renderTools(); 
         }
@@ -731,11 +668,9 @@
 
         function setTheme(theme) {
             document.body.classList.remove('theme-blue', 'theme-green', 'theme-pink', 'theme-dark');
-            
             if(theme !== 'default') {
                 document.body.classList.add(`theme-${theme}`);
             }
-            
             localStorage.setItem('graphicPanelTheme', theme);
         }
 
@@ -759,7 +694,7 @@
 
             if (filteredTools.length === 0) {
                 toolsGrid.innerHTML = `
-                    <div class="no-results">
+                    <div class="no-results glass-panel">
                         <i class="fas fa-search"></i>
                         <h3>Nenhuma ferramenta encontrada</h3>
                         <p>Tente usar termos de pesquisa diferentes ou ajustar o filtro.</p>
@@ -780,7 +715,7 @@
 
             if (popularTools.length === 0) {
                 popularGrid.innerHTML = `
-                    <div class="no-results">
+                    <div class="no-results glass-panel">
                         <i class="fas fa-chart-line"></i>
                         <h3>Nenhuma ferramenta popular ainda</h3>
                         <p>Aguarde por mais visitas para ver as ferramentas mais acessadas!</p>
@@ -798,7 +733,7 @@
 
         function createToolCard(tool) {
             const card = document.createElement('div');
-            card.className = 'card';
+            card.className = 'card glass-panel';
             card.dataset.id = tool.id;
             card.dataset.category = tool.category;
 
@@ -939,7 +874,7 @@
 
                     if (popularToolsFiltered.length === 0) {
                         popularGrid.innerHTML = `
-                            <div class="no-results">
+                            <div class="no-results glass-panel">
                                 <i class="fas fa-search"></i>
                                 <h3>Nenhuma ferramenta popular encontrada</h3>
                                 <p>Tente usar termos de pesquisa diferentes.</p>
@@ -964,4 +899,3 @@
     </script>
 </body>
 </html>
-
